@@ -3,4 +3,10 @@
     <string name="app_name">TesteIBM</string>
     <string name="webservice">https://bank-app-test.herokuapp.com/api/</string>
 
+    <!-- VALIDACAO LOGIN -->
+    <string name="error_incorrect_password_email">Seu password ou email esta incorreto</string>
+    <string name="error_field_required">Preencha esse campo</string>
+    <string name="error_caracteres_required">Uma letra maiuscula um numero e um caracter especial\nExemplo: @#$%^/n+=</string>
+    <string name="error_cpf_email_required">O usuario precisa ser CPF ou um Email</string>
+
 </resources>
