@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.leonardoliotino.testeibm.R;
 import com.leonardoliotino.testeibm.api.ApiMethodRetrofit;
 import com.leonardoliotino.testeibm.controller.validar.CPF;
+import com.leonardoliotino.testeibm.domain.LoginResponse;
 import com.leonardoliotino.testeibm.domain.User;
 
 import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -138,21 +138,31 @@ public class MainActivity extends AppCompatActivity {
 
             ApiMethodRetrofit apiMethodsRetrofit2 = retrofit.create(ApiMethodRetrofit.class);
 
-            Call<ResponseBody> callbackUser =  apiMethodsRetrofit2.login("test_user","Test@1");
+            Call<LoginResponse> callbackUser =  apiMethodsRetrofit2.login("test_user","Test@1");
 
-            callbackUser.enqueue(new Callback<ResponseBody>() {
+            callbackUser.enqueue(new Callback<LoginResponse>() {
 
                 @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-                   String body = String.valueOf(response.body());
+                    if (response.isSuccessful()) {
 
-                    Log.d("TAG-RETROFIT-SUCESS",body);
+                        if(response.code() == 200) {
+
+                            //Log.d("tag-retro", call.request().body().toString());
+
+                            LoginResponse loginResponse = (LoginResponse) response.body();
+
+                            Log.d("TAG-RETROFIT-SUCESS", loginResponse.userAcount.toString());
+
+                        }
+
+                   }
 
                 }
 
                 @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                public void onFailure(Call<LoginResponse> call, Throwable t) {
 
                     Log.d("TAG-RETROFIT-ERRO", t.getMessage());
 

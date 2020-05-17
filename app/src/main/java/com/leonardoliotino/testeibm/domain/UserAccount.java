@@ -1,12 +1,23 @@
 package com.leonardoliotino.testeibm.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserAccount {
 
-    public Integer userId;
-    public String name;
-    public String bankAccount;
-    public String agency;
-    public Double balance;
+    @SerializedName("userId")
+    private Integer userId;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("agency")
+    private String agency;
+
+    @SerializedName("bankAccount")
+    private String bankAccount;
+
+    @SerializedName("balance")
+    private Double balance;
 
     public Integer getUserId() {
         return userId;
