@@ -1,7 +1,7 @@
 package com.leonardoliotino.testeibm.api;
 
-import com.leonardoliotino.testeibm.domain.userAccount;
-
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -10,7 +10,7 @@ import retrofit2.http.POST;
 public interface ApiMethodRetrofit {
 
     @FormUrlEncoded
-    @POST("/app/login")
-    userAccount login(@Field("email") String email, @Field("password") String password);
+    @POST("/api/login")
+    Call<ResponseBody> login(@Field("user") String user, @Field("password") String password);
 
 }

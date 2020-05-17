@@ -1,6 +1,5 @@
 package com.leonardoliotino.testeibm.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -8,15 +7,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.leonardoliotino.testeibm.R;
+import com.leonardoliotino.testeibm.api.ApiMethodRetrofit;
 import com.leonardoliotino.testeibm.controller.validar.CPF;
-import com.leonardoliotino.testeibm.controller.validar.ValidaCPF;
+import com.leonardoliotino.testeibm.domain.User;
+
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+
 
 public class MainActivity extends AppCompatActivity {
 
     Button btnLogin;
     EditText inputUsername;
     EditText inputSenha;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
                 flagCancel = true;
 
-                //Log.d("TAG-CPF","ESSE NAO E UM CPF");
 
                 inputUsername.setError(getString(R.string.error_cpf_email_required));
 
@@ -112,6 +122,50 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        if(flagCancel == false) {
+
+            User user = new User();
+
+            user.setUsername(username);
+            user.setPassword(senha);
+
+            OkHttpClient okHttpClient = new OkHttpClient.Builder().build();
+
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(getString(R.string.webservice))
+                    .addConverterFactory(retrofit2.converter.gson.GsonConverterFactory.create())
+                    .client(okHttpClient)
+                    .build();
+
+            ApiMethodRetrofit apiMethodsRetrofit2 = retrofit.create(ApiMethodRetrofit.class);
+
+            Call<ResponseBody> callbackUser =  apiMethodsRetrofit2.login("test_user","Test@1");
+
+            callbackUser.enqueue(new Callback<ResponseBody>() {
+
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                   String body = String.valueOf(response.body());
+
+                    Log.d("TAG-RETROFIT-SUCESS",body);
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                    Log.d("TAG-RETROFIT-ERRO", t.getMessage());
+
+
+                }
+            });
+
+            inputUsername.setText(" ");
+            inputSenha.setText(" ");
+
+
+        }
+
     }
 
     private boolean isEmailValid(String email) {
@@ -121,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
         return email.matches("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})");
 
     }
-
 
 
 

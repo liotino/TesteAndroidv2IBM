@@ -1,6 +1,6 @@
 package com.leonardoliotino.testeibm.domain;
 
-public class userAccount {
+public class UserAccount {
 
     public Integer userId;
     public String name;
@@ -48,5 +48,14 @@ public class userAccount {
         this.balance = balance;
     }
 
-
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "userId=" + userId +
+                ", name='" + name + '\'' +
+                ", bankAccount='" + bankAccount + '\'' +
+                ", agency='" + agency + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
