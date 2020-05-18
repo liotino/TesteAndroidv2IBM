@@ -13,7 +13,9 @@ import com.leonardoliotino.testeibm.R;
 import com.leonardoliotino.testeibm.domain.StatementList;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -35,7 +37,16 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
     public void onBindViewHolder(@NonNull StatementAdapter.ViewHolder holder, int position) {
 
      StatementList statement = statementLists.get(position);
-     holder.bindView(statement);
+
+        //Exception devido a data
+
+        try {
+
+            holder.bindView(statement);
+
+        }catch(ParseException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -71,7 +82,7 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
         }
 
 
-      void bindView(StatementList statementList) {
+      void bindView(StatementList statementList) throws ParseException {
 
           TextView txtTitle = itemView.findViewById(R.id.txtTitle);
           TextView txtDesc = itemView.findViewById(R.id.txtDesc);
@@ -81,8 +92,9 @@ public class StatementAdapter extends RecyclerView.Adapter<StatementAdapter.View
           txtTitle.setText(statementList.getTitle());
           txtDesc.setText(statementList.getDesc());
 
-          //SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-          txtDate.setText(statementList.getDate());
+          SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+          Date dataConvertida = new SimpleDateFormat("yyyy-MM-dd").parse(statementList.getDate());
+          txtDate.setText(formatoData.format(dataConvertida));
 
           NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
           txtValue.setText(numberFormat.format(statementList.getValue()));

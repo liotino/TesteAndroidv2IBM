@@ -202,9 +202,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            inputUsername.setText(" ");
-            inputSenha.setText(" ");
-
+            inputUsername.getText().clear();
+            inputSenha.getText().clear();
 
         }
 
