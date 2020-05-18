@@ -1,5 +1,7 @@
 package com.leonardoliotino.testeibm.activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -9,11 +11,13 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.leonardoliotino.testeibm.R;
 import com.leonardoliotino.testeibm.api.ApiMethodRetrofit;
 import com.leonardoliotino.testeibm.controller.validar.CPF;
 import com.leonardoliotino.testeibm.domain.LoginResponse;
 import com.leonardoliotino.testeibm.domain.User;
+import com.leonardoliotino.testeibm.domain.UserAccount;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     Button btnLogin;
     EditText inputUsername;
     EditText inputSenha;
+    SharedPreferences pref;
+    SharedPreferences.Editor prefEditor;
 
 
     @Override
@@ -155,6 +161,29 @@ public class MainActivity extends AppCompatActivity {
 
                             Log.d("TAG-RETROFIT-SUCESS", loginResponse.userAcount.toString());
 
+                            UserAccount userAccount = (UserAccount) loginResponse.userAcount;
+
+
+                            Gson gson = new Gson();
+
+                            String jsonUser = gson.toJson(userAccount);
+
+                            Log.d("TAG-OBJ-USERACOUNT-JSON",jsonUser);
+
+                            pref = getSharedPreferences("objUser", Context.MODE_PRIVATE);
+
+                            prefEditor = pref.edit();
+
+                            prefEditor.putString("objUser",jsonUser);
+
+                            if(prefEditor.commit()) {
+
+                                Log.d("TAG-ACTIVI-SALVADO","SALVOU COM SUCESSO");
+                                Log.d("TAG-ACTIVI-SALVADO-JSON",jsonUser.toString());
+
+                            }
+
+
                         }
 
                    }
@@ -180,9 +209,9 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean isEmailValid(String email) {
 
-        //return email.contains("@") && email.contains(".");
+        return email.contains("@") && email.contains(".");
 
-        return email.matches("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})");
+        //return email.matches("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})");
 
     }
 

@@ -9,4 +9,8 @@
     <string name="error_caracteres_required">Uma letra maiuscula um numero e um caracter especial\nExemplo: @#$%^/n+=</string>
     <string name="error_cpf_email_required">O usuario precisa ser CPF ou um Email</string>
 
+    <string name="account">Conta</string>
+    <string name="balance">Saldo</string>
+    <string name="recents">Recentes</string>
+
 </resources>
