@@ -1,6 +1,7 @@
 package com.leonardoliotino.testeibm.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -163,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
 
                             UserAccount userAccount = (UserAccount) loginResponse.userAcount;
 
-
                             Gson gson = new Gson();
 
                             String jsonUser = gson.toJson(userAccount);
@@ -182,6 +182,9 @@ public class MainActivity extends AppCompatActivity {
                                 Log.d("TAG-ACTIVI-SALVADO-JSON",jsonUser.toString());
 
                             }
+
+                            Intent intent = new Intent(getApplicationContext(),ActivityContaSelecionada.class);
+                            startActivity(intent);
 
 
                         }

@@ -19,6 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.leonardoliotino.testeibm.activity.ActivityContaSelecionada"
+            android:label="@string/app_name"
+            android:parentActivityName="com.leonardoliotino.testeibm.activity.MainActivity">
+        </activity>
+
+
     </application>
 
 </manifest>
