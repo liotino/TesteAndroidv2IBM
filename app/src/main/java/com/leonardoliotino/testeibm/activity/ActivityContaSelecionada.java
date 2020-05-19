@@ -1,9 +1,12 @@
 package com.leonardoliotino.testeibm.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,6 +41,7 @@ public class ActivityContaSelecionada extends AppCompatActivity {
 
  ImageView btnLogOut;
  SharedPreferences pref;
+ SharedPreferences.Editor prefEditor;
 
  RecyclerView recyclerView;
  LinearLayoutManager linearLayoutManager;
@@ -56,6 +60,7 @@ public class ActivityContaSelecionada extends AppCompatActivity {
       txtContaNumero = (TextView) findViewById(R.id.txtNumeroConta);
       txtSaldo = (TextView) findViewById(R.id.txtSaldo);
       txtSaldoQuantia = (TextView) findViewById(R.id.txtSaldoQuantia);
+      btnLogOut = (ImageView) findViewById(R.id.btnLogOut);
 
       pref = getSharedPreferences("objUser", Context.MODE_PRIVATE);
 
@@ -121,6 +126,28 @@ public class ActivityContaSelecionada extends AppCompatActivity {
                }
 
            });
+
+
+           btnLogOut.setOnClickListener(new View.OnClickListener() {
+
+               @Override
+               public void onClick(View view) {
+
+                   /*
+                   prefEditor = pref.edit();
+                   prefEditor.remove("objUser");
+                   prefEditor.clear();
+                   prefEditor.commit();
+                   */
+
+                   Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                   startActivity(intent);
+
+               }
+
+           });
+
+
 
       }
 
