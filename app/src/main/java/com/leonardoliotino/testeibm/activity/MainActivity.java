@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.leonardoliotino.testeibm.R;
 import com.leonardoliotino.testeibm.api.ApiMethodRetrofit;
 import com.leonardoliotino.testeibm.controller.validar.CPF;
+import com.leonardoliotino.testeibm.controller.validar.Valida;
 import com.leonardoliotino.testeibm.domain.LoginResponse;
 import com.leonardoliotino.testeibm.domain.User;
 import com.leonardoliotino.testeibm.domain.UserAccount;
@@ -90,16 +91,15 @@ public class MainActivity extends AppCompatActivity {
         inputUsername.setError(null);
         inputSenha.setError(null);
 
-        String username = inputUsername.getText().toString();
-        String senha = inputSenha.getText().toString();
+        String username = inputUsername.getText().toString().trim();
+        String senha = inputSenha.getText().toString().trim();
 
         Boolean flagCancel = false;
-
 
         if(!TextUtils.isEmpty(username)) {
 
             //checa se o usuario e um email
-            if(isEmailValid(username)) {
+            if(Valida.isEmail(username)) {
 
                 flagCancel = false;
 
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        if(!senha.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{3,}$")) {
+        if(!Valida.isPassword(senha)) {
 
           flagCancel = true;
 
@@ -227,14 +227,6 @@ public class MainActivity extends AppCompatActivity {
             inputSenha.getText().clear();
 
         }
-
-    }
-
-    private boolean isEmailValid(String email) {
-
-        return email.contains("@") && email.contains(".");
-
-        //return email.matches("^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})");
 
     }
 
