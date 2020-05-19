@@ -14,7 +14,7 @@
         >
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivLogo"
+            android:id="@+id/logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
@@ -25,13 +25,13 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etUsername"
+            android:id="@+id/fieldUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivLogo"
-            app:layout_constraintBottom_toTopOf="@id/etPassword"
+            app:layout_constraintTop_toBottomOf="@id/logo"
+            app:layout_constraintBottom_toTopOf="@id/fieldPassword"
             app:layout_constraintVertical_chainStyle="packed"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="username"
@@ -48,7 +48,7 @@
 
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etPassword"
+            android:id="@+id/fieldPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -57,7 +57,7 @@
             app:layout_constraintBottom_toTopOf="@id/btnLogin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etUsername"
+            app:layout_constraintTop_toBottomOf="@id/fieldUsername"
             app:layout_constraintVertical_chainStyle="packed"
             >
 
@@ -81,6 +81,39 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardViewLastUser"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="18dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/fieldUsername"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo"
+            app:layout_constraintVertical_bias="0.0">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/greyLight"
+                android:text="Last user:" />
+
+            <TextView
+                android:id="@+id/txtNameLastUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="30dp"
+                android:text="Maria de Claudio Almeida"
+                android:textColor="@color/greyMedium" />
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

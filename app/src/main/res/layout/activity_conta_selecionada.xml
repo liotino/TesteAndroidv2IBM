@@ -15,7 +15,7 @@
         android:paddingBottom="@dimen/content_padding"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/vSpace"
+        app:layout_constraintBottom_toBottomOf="@id/space"
         android:padding="@dimen/content_padding"/>
 
     <TextView
@@ -85,7 +85,7 @@
 
 
     <View
-        android:id="@+id/vSpace"
+        android:id="@+id/space"
         android:layout_width="match_parent"
         android:layout_height="@dimen/content_padding"
         android:background="@color/colorPrimary"
@@ -103,7 +103,7 @@
         android:layout_marginStart="@dimen/content_padding"
         android:layout_marginBottom="@dimen/content_padding"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSpace"
+        app:layout_constraintTop_toBottomOf="@+id/space"
         android:text="@string/recents" />
 
     <androidx.recyclerview.widget.RecyclerView

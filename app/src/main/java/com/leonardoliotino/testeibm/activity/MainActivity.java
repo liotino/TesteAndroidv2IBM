@@ -9,8 +9,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.gson.Gson;
 import com.leonardoliotino.testeibm.R;
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor prefEditor;
 
+    CardView cardViewLastUser;
+    TextView txtNomeLastUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +49,23 @@ public class MainActivity extends AppCompatActivity {
         btnLogin = (Button) findViewById(R.id.btnLogin);
         inputUsername = (EditText) findViewById(R.id.inputUsername);
         inputSenha = (EditText) findViewById(R.id.inputSenha);
+        cardViewLastUser = (CardView) findViewById(R.id.cardViewLastUser);
+        txtNomeLastUser = (TextView) findViewById(R.id.txtNameLastUser);
+
+        pref = getSharedPreferences("objUser", Context.MODE_PRIVATE);
+
+        if(!pref.getString("objUser", "").isEmpty()) {
+
+            Gson gson = new Gson();
+
+            String jsonRecupera = pref.getString("objUser", "");
+
+            UserAccount userAccount = gson.fromJson(jsonRecupera, UserAccount.class);
+
+            txtNomeLastUser.setText(userAccount.getName());
+
+            cardViewLastUser.setVisibility(View.VISIBLE);
+        }
 
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
